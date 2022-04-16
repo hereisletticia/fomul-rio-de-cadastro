@@ -46,6 +46,16 @@ function checkInputs() {
     }else {
         setSuccessFor(passwordConfirmation);
     }
+
+    const formControls = form.querySelectorAll('.form-control');
+
+    const formIsValid = [... formControls].every((formControl) => {
+        return (formControl.className === 'form-control success');
+    });
+
+    if (formIsValid) {
+        alert('Cadastro concluído com sucesso!');
+    }
 }
 
 function setErrorFor(input, message) {
