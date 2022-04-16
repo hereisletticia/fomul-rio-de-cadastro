@@ -6,6 +6,8 @@ const passwordConfirmation = document.getElementById('password-confirmation');
 
 form.addEventListener("submit", (e) => {
     e.preventDefault(); // previne o carregamento padrão da page
+
+    checkInputs();
 });
 
 function checkInputs() {
@@ -15,7 +17,34 @@ function checkInputs() {
     const passwordConfirmationValue = passwordConfirmation.value;
 
     if (usernameValue == '') {
-        setErrorFor(username, 'O nomde de usuário é obrigatório');
+        setErrorFor(username, 'O nome de usuário é obrigatório');
+    }else {
+        setSuccessFor(username);
+    }
+
+    if (emailValue == '') {
+    setErrorFor(email, 'O email é obrigatório'); // campo em branco        
+    }else if (!checkEmail(emailValue)) {
+        // e-mail formato errado
+        setErrorFor(email, 'Por favor, insira um e-mail válido');
+    }else {
+        setSuccessFor(email); // sucesso
+    }
+
+    if (passwordValue == '') {
+        setErrorFor(password, 'A senha é obrigatória');
+    }else if (passwordValue.length < 6) {
+        setErrorFor(password, 'A senha deve ter no mínimo 6 caracteres');
+    }else {
+        setSuccessFor(password);
+    }
+
+    if (passwordConfirmationValue == '') {
+        setErrorFor(passwordConfirmation, 'A confirmação de senha é obrigatória');
+    }else if (passwordConfirmationValue != passwordValue) {
+        setErrorFor(passwordConfirmation, 'As senhas não conferem');
+    }else {
+        setSuccessFor(passwordConfirmation);
     }
 }
 
@@ -36,3 +65,10 @@ function setSuccessFor(input) {
     // adicionar a classe de sucesso
     formControl.className = "form-control success";
 }
+
+// regex e-mail
+function checkEmail(email) {
+    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+      email
+    );
+  }
