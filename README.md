@@ -1,2 +1,5 @@
-# fomulario-de-cadastro
-Formulário de Cadastro (JavaScript, HTML &amp; CSS)
+# Formulário de Cadastro
+
+![](Untitled design.png)
+
+Form desenvolvido em JavaScript, HTML e CSS.
